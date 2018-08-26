@@ -1,0 +1,16 @@
+{
+  "name": "api-server",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Api server",
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "cookie-parser": "^1.4.3",
+    "express": "~4.15.2"
+  },
+  "devDependencies": {}
+}

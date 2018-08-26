@@ -57,6 +57,9 @@ sudo docker-compose up -d
 #### Docker services
 
 ```
+# API server
+Port: 3000
+
 # React Native server
 Port: 19000
 
