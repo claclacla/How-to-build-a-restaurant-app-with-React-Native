@@ -52,6 +52,9 @@ sudo docker-compose up -d
 # on "Explore" tab search bar:
 # exp://<your-laptop-ip-address>:19000
 
+# For watching the console logs open a terminal and use the following command:
+# sudo docker logs RestaurantMobileApp --follow
+
 ```
 
 #### Docker services
