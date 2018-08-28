@@ -5,6 +5,14 @@ let restaurant = [
   {
     uid: "iIkwlg8c",
     name: "Magic Pizza"
+  },
+  {
+    uid: "3pQwDp0B",
+    name: "Magic Pasta"
+  },
+  {
+    uid: "035TfJp0",
+    name: "Magic Wine"
   }
 ]
 

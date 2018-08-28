@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableHighlight } from 'react-native';
 
 import { restaurantGetRequest } from '../../../../repositories/pure-src/restaurants';
 
@@ -7,15 +7,15 @@ class Restaurants extends React.Component {
   constructor() {
     super();
 
-    this.restaurants = [];
+    this.state = {
+      restaurants: []
+    };
 
     restaurantGetRequest('')
       .then(restaurants => {
-        console.log(restaurants);
-        
-        this.restaurants = restaurants;
+        this.setState({ restaurants });
       })
-      .catch((error) => {        
+      .catch((error) => {
         console.log("Delivery restaurants retrieve error");
       })
 
@@ -33,12 +33,30 @@ class Restaurants extends React.Component {
     return (
       <View>
         <FlatList
-          data={this.restaurants}
-          renderItem={({ item }) => <Text>{item.name}</Text>}
+          data={this.state.restaurants}
+          renderItem={({ item }) =>
+            <TouchableHighlight style={styles.restaurantBtn} onPress={() => navigation.navigate('RestaurantDetail')}>
+              <Text style={styles.restaurantName}>{item.name}</Text>
+            </TouchableHighlight>
+          }
+          keyExtractor={(item, index) => item.uid}
         />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  restaurantBtn: {
+    marginTop: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#777",
+    height: 80
+  },
+  restaurantName: {
+    color: "#fff"
+  },
+});
 
 export default Restaurants;

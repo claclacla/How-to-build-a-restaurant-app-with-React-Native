@@ -5,7 +5,6 @@ import Restaurants from './components/Restaurants';
 
 const DeliveryRestaurants = () => (
   <View>
-    <Text>Delivery</Text>
     <Restaurants/>
   </View>
 );
