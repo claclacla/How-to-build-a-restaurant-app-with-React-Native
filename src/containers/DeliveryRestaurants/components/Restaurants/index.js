@@ -11,7 +11,7 @@ class Restaurants extends React.Component {
       restaurants: []
     };
 
-    restaurantGetRequest('')
+    restaurantGetRequest('q={"service":"Delivery"}')
       .then(restaurants => {
         this.setState({ restaurants });
       })
