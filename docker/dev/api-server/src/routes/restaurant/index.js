@@ -1,26 +1,50 @@
 const express = require('express');
 const router = express.Router();
 
-let restaurant = [
+let restaurants = [
   {
     uid: "iIkwlg8c",
-    name: "Magic Pizza"
+    name: "Magic Pizza",
+    services: [
+      "Delivery"
+    ]
   },
   {
     uid: "3pQwDp0B",
-    name: "Magic Pasta"
+    name: "Magic Pasta",
+    services: [
+      "Take away"
+    ]
   },
   {
     uid: "035TfJp0",
-    name: "Magic Wine"
+    name: "Magic Wine",
+    services: [
+      "Delivery",
+      "Take away"
+    ]
   }
 ]
 
 router
   .get('/', function (req, res, next) {
-      res.send({
-        data: restaurant
-      });
+    let query = req.query;
+
+    let resRestaurants = restaurants;
+
+    if(query.q) {      
+      let q = JSON.parse(query.q);
+      
+      if(q.service) {
+        resRestaurants = resRestaurants.filter(restaurant => 
+          restaurant.services.findIndex(service => service === q.service) >= 0
+        )
+      }
+    }
+
+    res.send({
+      data: resRestaurants
     });
+  });
 
 module.exports = router;
