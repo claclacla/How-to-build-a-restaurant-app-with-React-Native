@@ -18,15 +18,6 @@ class Restaurants extends React.Component {
       .catch((error) => {
         console.log("Delivery restaurants retrieve error");
       })
-
-    /*
-    try {
-      this.restaurants = await restaurantGetRequest('');
-    } catch (error) {
-      console.log("Delivery restaurants retrieve error");
-      return;
-    }
-    */
   }
 
   render() {
