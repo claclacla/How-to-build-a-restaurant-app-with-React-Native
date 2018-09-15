@@ -5,14 +5,14 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
-import restaurant from './src/reducers/restaurant';
+import restaurants from './src/reducers/restaurants';
 
 import Home from './src/containers/Home';
 import TakeAwayRestaurants from './src/containers/TakeAwayRestaurants';
 import DeliveryRestaurants from './src/containers/DeliveryRestaurants';
 //import AppStatusBar from './src/components/AppStatusBar';
 
-const store = createStore(combineReducers({ restaurant }), applyMiddleware(thunk));
+const store = createStore(combineReducers({ restaurants }), applyMiddleware(thunk));
 
 const AppStackNavigator = createStackNavigator({
   Home: {

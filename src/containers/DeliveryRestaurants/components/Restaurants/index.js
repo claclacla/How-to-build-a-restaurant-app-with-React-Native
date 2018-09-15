@@ -1,30 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableHighlight } from 'react-native';
+import { connect } from 'react-redux';
 
-import { restaurantGetRequest } from '../../../../repositories/pure-src/restaurants';
+import { getRestaurants } from '../../../../dataProvider/restaurants';
 
 class Restaurants extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      restaurants: []
-    };
-
-    restaurantGetRequest('q={"service":"Delivery"}')
-      .then(restaurants => {
-        this.setState({ restaurants });
-      })
-      .catch((error) => {
-        console.log("Delivery restaurants retrieve error");
-      })
+  constructor(props) {
+    super(props);
+    
+    this.props.getRestaurants();
   }
 
   render() {
     return (
       <View>
         <FlatList
-          data={this.state.restaurants}
+          data={this.props.restaurants}
           renderItem={({ item }) =>
             <TouchableHighlight style={styles.restaurantBtn} onPress={() => navigation.navigate('RestaurantDetail')}>
               <Text style={styles.restaurantName}>{item.name}</Text>
@@ -50,4 +41,19 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Restaurants;
+function mapStateToProps({ restaurants }) {
+  return {
+    restaurants
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getRestaurants: () => dispatch(getRestaurants())
+  }
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Restaurants);
