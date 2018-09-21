@@ -1,9 +1,8 @@
-import { CREATE_RESTAURANTS } from '../actions/restaurants';
-//import Restaurant from '../entities/Restaurant';
+import { SET_RESTAURANTS } from '../actions/restaurants';
 
 function restaurants(state = [], action) {
   switch (action.type) {
-    case CREATE_RESTAURANTS:
+    case SET_RESTAURANTS:
       return action.restaurants;
     default:
       return state;

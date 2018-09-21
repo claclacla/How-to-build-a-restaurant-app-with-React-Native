@@ -1,9 +1,5 @@
 version: '3'
 
-networks:
-  api_server:
-    driver: bridge
-
 services:
   restaurant-mobile-app:
     build: ./restaurant-mobile-app
@@ -11,8 +7,6 @@ services:
     container_name: RestaurantMobileApp
     volumes:
       - "${APP_FOLDER}:/usr/src/app"
-    networks:
-      - api_server
     ports:
       - 19000:19000
       - 19001:19001
@@ -27,7 +21,5 @@ services:
       - 3000:3000
     volumes:
       - "${APP_FOLDER}:/usr/src/app"
-    networks:
-      - api_server
     tty: true
     stdin_open: true

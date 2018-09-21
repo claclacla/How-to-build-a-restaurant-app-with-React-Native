@@ -87,3 +87,4 @@ This project is licensed under the MIT License
 - [React Native](https://facebook.github.io/react-native)
 - [Expo](https://expo.io)
 - [React navigation](https://reactnavigation.org)
+- [Environment variables module](https://github.com/zetachang/react-native-dotenv)

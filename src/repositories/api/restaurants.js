@@ -11,8 +11,6 @@ import mapRestaurantDTOToRestaurant from '../../mapToEntities/mapRestaurantDTOTo
 
 // Create the repository
 
-console.log(`${API_ADDRESS}/restaurant`);
-
 const restaurantRepository = createPureSrc(
   `${API_ADDRESS}/restaurant`,
   fetchDeliveryMethod,
