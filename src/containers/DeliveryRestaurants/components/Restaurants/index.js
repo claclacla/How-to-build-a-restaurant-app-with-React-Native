@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 
-import { getRestaurants } from '../../../../dataProviders/api/restaurants';
+import RestaurantsDataProvider from '../../../../dataProviders/api/RestaurantsDataProvider';
 import { setRestaurants } from '../../../../actions/restaurants';
 
 class Restaurants extends React.Component {
@@ -12,7 +12,7 @@ class Restaurants extends React.Component {
 
   async componentDidMount() {
     try {
-      let restaurants = await getRestaurants();  
+      let restaurants = await RestaurantsDataProvider.getRestaurants();
       this.props.setRestaurants(restaurants);
     } catch (error) {
       
