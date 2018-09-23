@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableHighlight } from 'react-native';
 
 import CategoriesDataProvider from '../../dataProviders/api/CategoriesDataProvider';
 
@@ -11,6 +11,8 @@ class Home extends React.Component {
   async componentDidMount() {
     try {
       let categories = await CategoriesDataProvider.getCategories();
+
+      this.setState({ categories });
     } catch (error) {
 
     }
@@ -19,33 +21,31 @@ class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Benvenuto!</Text>
-        <TouchableHighlight style={styles.btn} onPress={() => navigation.navigate('TakeAwayRestaurants')} underlayColor="#888">
-          <Text style={styles.btnText}>Take away</Text>
-        </TouchableHighlight>
-        <TouchableHighlight style={styles.btn} onPress={() => navigation.navigate('DeliveryRestaurants')} underlayColor="#888">
-          <Text style={styles.btnText}>Delivery</Text>
-        </TouchableHighlight>
+        {this.state && this.state.categories &&
+          <FlatList
+            data={this.state.categories}
+            renderItem={({ item }) =>
+              <TouchableHighlight style={styles.categoryBtn} onPress={() => navigation.navigate('Restaurants')}>
+                <Text style={styles.categoryName}>{item.name}</Text>
+              </TouchableHighlight>
+            }
+            keyExtractor={(item, index) => item.uid}
+          />
+        }
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  btn: {
-    marginTop: 20,
+  categoryBtn: {
+    marginTop: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#777",
-    width: 200,
     height: 80
   },
-  btnText: {
+  categoryName: {
     color: "#fff"
   },
 });
