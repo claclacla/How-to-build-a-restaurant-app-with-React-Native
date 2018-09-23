@@ -18,6 +18,13 @@ class Home extends React.Component {
     }
   }
 
+  onSelectCategory(categoryName) {
+    const { navigate } = this.props.navigation;
+    navigate('Restaurants', {
+      categoryName: categoryName
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -25,7 +32,7 @@ class Home extends React.Component {
           <FlatList
             data={this.state.categories}
             renderItem={({ item }) =>
-              <TouchableHighlight style={styles.categoryBtn} onPress={() => navigation.navigate('Restaurants')}>
+              <TouchableHighlight style={styles.categoryBtn} onPress={() => this.onSelectCategory(item.name)}>
                 <Text style={styles.categoryName}>{item.name}</Text>
               </TouchableHighlight>
             }

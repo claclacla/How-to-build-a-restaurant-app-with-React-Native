@@ -40,13 +40,13 @@ router
     let query = req.query;
 
     let resRestaurants = restaurants;
-
+    
     if(query.q) {      
       let q = JSON.parse(query.q);
       
-      if(q.service) {
+      if(q.category) {
         resRestaurants = resRestaurants.filter(restaurant => 
-          restaurant.services.findIndex(service => service === q.service) >= 0
+          restaurant.categories.findIndex(category => category === q.category) >= 0
         )
       }
     }

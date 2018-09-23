@@ -8,8 +8,7 @@ import thunk from 'redux-thunk';
 import restaurants from './src/reducers/restaurants';
 
 import Home from './src/containers/Home';
-import TakeAwayRestaurants from './src/containers/TakeAwayRestaurants';
-import DeliveryRestaurants from './src/containers/DeliveryRestaurants';
+import Restaurants from './src/containers/Restaurants';
 //import AppStatusBar from './src/components/AppStatusBar';
 
 const store = createStore(combineReducers({ restaurants }), applyMiddleware(thunk));
@@ -18,11 +17,8 @@ const AppStackNavigator = createStackNavigator({
   Home: {
     screen: Home
   },
-  TakeAwayRestaurants: {
-    screen: TakeAwayRestaurants
-  },
-  DeliveryRestaurants: {
-    screen: DeliveryRestaurants
+  Restaurants: {
+    screen: Restaurants
   }
 })
 

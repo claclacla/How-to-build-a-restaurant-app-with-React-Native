@@ -5,14 +5,16 @@ import { connect } from 'react-redux';
 import RestaurantsDataProvider from '../../../../dataProviders/api/RestaurantsDataProvider';
 import { setRestaurants } from '../../../../actions/restaurants';
 
-class Restaurants extends React.Component {
+class RestaurantsList extends React.Component {
   constructor(props) {
     super(props);
   }
 
   async componentDidMount() {
     try {
-      let restaurants = await RestaurantsDataProvider.getRestaurants();
+      let categoryName = this.props.categoryName;
+      
+      let restaurants = await RestaurantsDataProvider.getCategoryRestaurants({ categoryName });
       this.props.setRestaurants(restaurants);
     } catch (error) {
       
@@ -64,4 +66,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Restaurants);
+)(RestaurantsList);
