@@ -2,7 +2,8 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 
-const restaurant = require('./routes/restaurant/index');
+const restaurants = require('./routes/restaurants/index');
+const categories = require('./routes/categories/index');
 
 const app = express();
 
@@ -26,7 +27,8 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use('/restaurant', restaurant);
+app.use('/categories', categories);
+app.use('/restaurants', restaurants);
 
 // error handler
 

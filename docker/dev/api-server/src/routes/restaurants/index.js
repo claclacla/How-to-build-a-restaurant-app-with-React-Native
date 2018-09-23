@@ -5,6 +5,9 @@ let restaurants = [
   {
     uid: "iIkwlg8c",
     name: "Magic Pizza",
+    categories: [
+      "Pizza"
+    ],
     services: [
       "Delivery"
     ]
@@ -12,13 +15,19 @@ let restaurants = [
   {
     uid: "3pQwDp0B",
     name: "Magic Pasta",
+    categories: [
+      "Pasta"
+    ],
     services: [
       "Take away"
     ]
   },
   {
     uid: "035TfJp0",
-    name: "Magic Wine",
+    name: "Magic Fast Food",
+    categories: [
+      "Hamburger"
+    ],
     services: [
       "Delivery",
       "Take away"
