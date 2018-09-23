@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 let categories = [
-  "Pizza",
-  "Pasta",
-  "Hamburger"
+  { uid: "gTp9vMd4", name: "Pizza" },
+  { uid: "Lk3oPgkB", name: "Pasta" },
+  { uid: "96rJt8dV", name: "Hamburger" }
 ]
 
 router

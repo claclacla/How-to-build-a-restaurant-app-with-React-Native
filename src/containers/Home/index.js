@@ -1,17 +1,35 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 
-const Home = ({ navigation }) => (
-  <View style={styles.container}>
-    <Text>Benvenuto!</Text>
-    <TouchableHighlight style={styles.btn} onPress={() => navigation.navigate('TakeAwayRestaurants')} underlayColor="#888">
-      <Text style={styles.btnText}>Take away</Text>
-    </TouchableHighlight>
-    <TouchableHighlight style={styles.btn} onPress={() => navigation.navigate('DeliveryRestaurants')} underlayColor="#888">
-      <Text style={styles.btnText}>Delivery</Text>
-    </TouchableHighlight>
-  </View>
-);
+import CategoriesDataProvider from '../../dataProviders/api/CategoriesDataProvider';
+
+class Home extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  async componentDidMount() {
+    try {
+      let categories = await CategoriesDataProvider.getCategories();
+    } catch (error) {
+
+    }
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>Benvenuto!</Text>
+        <TouchableHighlight style={styles.btn} onPress={() => navigation.navigate('TakeAwayRestaurants')} underlayColor="#888">
+          <Text style={styles.btnText}>Take away</Text>
+        </TouchableHighlight>
+        <TouchableHighlight style={styles.btn} onPress={() => navigation.navigate('DeliveryRestaurants')} underlayColor="#888">
+          <Text style={styles.btnText}>Delivery</Text>
+        </TouchableHighlight>
+      </View>
+    )
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
