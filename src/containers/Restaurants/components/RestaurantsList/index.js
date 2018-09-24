@@ -21,13 +21,20 @@ class RestaurantsList extends React.Component {
     }
   }
 
+  onSelectRestaurant(restaurantName) {
+    const { navigate } = this.props.navigation;
+    navigate('RestaurantDetail', {
+      restaurantName: restaurantName
+    });
+  }
+
   render() {
     return (
       <View>
         <FlatList
           data={this.props.restaurants}
           renderItem={({ item }) =>
-            <TouchableHighlight style={styles.restaurantBtn} onPress={() => navigation.navigate('RestaurantDetail')}>
+            <TouchableHighlight style={styles.restaurantBtn} onPress={() => this.onSelectRestaurant(item.name)}>
               <Text style={styles.restaurantName}>{item.name}</Text>
             </TouchableHighlight>
           }

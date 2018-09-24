@@ -17,7 +17,7 @@ class Restaurants extends React.Component {
     return (
       <View>
         {this.state && this.state.categoryName &&
-          <RestaurantsList categoryName={this.state.categoryName} />
+          <RestaurantsList categoryName={this.state.categoryName} navigation={this.props.navigation} />
         }
       </View>
     )
