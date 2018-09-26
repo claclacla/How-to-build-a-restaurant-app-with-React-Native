@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
@@ -15,6 +16,12 @@ import RestaurantDetail from './src/containers/RestaurantDetail';
 
 const store = createStore(combineReducers({ restaurants, products }), applyMiddleware(thunk));
 
+const RestaurantTabs = createBottomTabNavigator(
+  {
+    "Restaurant": RestaurantDetail
+  },
+);
+
 const AppStackNavigator = createStackNavigator({
   Home: {
     screen: Home
@@ -22,10 +29,10 @@ const AppStackNavigator = createStackNavigator({
   Restaurants: {
     screen: Restaurants
   },
-  RestaurantDetail: {
-    screen: RestaurantDetail
+  RestaurantTabs: {
+    screen: RestaurantTabs 
   }
-})
+});
 
 export default class App extends React.Component {
   render() {
