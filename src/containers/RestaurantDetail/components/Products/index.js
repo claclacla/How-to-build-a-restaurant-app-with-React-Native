@@ -8,32 +8,39 @@ import { setProducts } from '../../../../actions/products';
 class RestaurantsList extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      loading: true
+    }
   }
 
   async componentDidMount() {
     try {
       let restaurantName = this.props.restaurantName;
-      
+
       let products = await ProductsDataProvider.getRestaurantProducts({ restaurantName });
-      
       this.props.setProducts(products);
+
+      this.setState({ loading: false });
     } catch (error) {
-      
+
     }
   }
 
-  render() {    
+  render() {
     return (
       <View>
-        <FlatList
-          data={this.props.products}
-          renderItem={({ item }) =>
-            <TouchableHighlight style={styles.productBtn} onPress={() => navigation.navigate('ProductDetail')}>
-              <Text style={styles.productName}>{item.name}</Text>
-            </TouchableHighlight>
-          }
-          keyExtractor={(item, index) => item.uid}
-        />
+        {!this.state.loading &&
+          <FlatList
+            data={this.props.products}
+            renderItem={({ item }) =>
+              <TouchableHighlight style={styles.productBtn} onPress={() => navigation.navigate('ProductDetail')}>
+                <Text style={styles.productName}>{item.name}</Text>
+              </TouchableHighlight>
+            }
+            keyExtractor={(item, index) => item.uid}
+          />
+        }
       </View>
     );
   }
@@ -52,7 +59,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function mapStateToProps({ products }) {  
+function mapStateToProps({ products }) {
   return {
     products
   }

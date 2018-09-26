@@ -8,16 +8,22 @@ import { setRestaurants } from '../../../../actions/restaurants';
 class RestaurantsList extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      loading: true
+    }
   }
 
   async componentDidMount() {
     try {
       let categoryName = this.props.categoryName;
-      
+
       let restaurants = await RestaurantsDataProvider.getCategoryRestaurants({ categoryName });
       this.props.setRestaurants(restaurants);
+
+      this.setState({ loading: false });
     } catch (error) {
-      
+
     }
   }
 
@@ -31,15 +37,17 @@ class RestaurantsList extends React.Component {
   render() {
     return (
       <View>
-        <FlatList
-          data={this.props.restaurants}
-          renderItem={({ item }) =>
-            <TouchableHighlight style={styles.restaurantBtn} onPress={() => this.onSelectRestaurant(item.name)}>
-              <Text style={styles.restaurantName}>{item.name}</Text>
-            </TouchableHighlight>
-          }
-          keyExtractor={(item, index) => item.uid}
-        />
+        {!this.state.loading &&
+          <FlatList
+            data={this.props.restaurants}
+            renderItem={({ item }) =>
+              <TouchableHighlight style={styles.restaurantBtn} onPress={() => this.onSelectRestaurant(item.name)}>
+                <Text style={styles.restaurantName}>{item.name}</Text>
+              </TouchableHighlight>
+            }
+            keyExtractor={(item, index) => item.uid}
+          />
+        }
       </View>
     );
   }
