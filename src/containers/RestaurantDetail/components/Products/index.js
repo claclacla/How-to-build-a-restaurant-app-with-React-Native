@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import ProductsDataProvider from '../../../../dataProviders/api/ProductsDataProvider';
 import { setProducts } from '../../../../actions/products';
+import { addProduct } from '../../../../actions/order';
 
 class RestaurantsList extends React.Component {
   constructor(props) {
@@ -27,6 +28,10 @@ class RestaurantsList extends React.Component {
     }
   }
 
+  onSelectProduct(product) {
+    this.props.addProduct(product);
+  }
+
   render() {
     return (
       <View>
@@ -34,9 +39,14 @@ class RestaurantsList extends React.Component {
           <FlatList
             data={this.props.products}
             renderItem={({ item }) =>
-              <TouchableHighlight style={styles.productBtn} onPress={() => navigation.navigate('ProductDetail')}>
-                <Text style={styles.productName}>{item.name}</Text>
-              </TouchableHighlight>
+              <View>
+                <TouchableHighlight style={styles.productBtn} onPress={() => this.onSelectProduct(item)}>
+                  <Text style={styles.productName}>{item.name}</Text>
+                </TouchableHighlight>
+                <TouchableHighlight style={styles.addBtn}>
+                  <Text>+</Text>
+                </TouchableHighlight>
+              </View>
             }
             keyExtractor={(item, index) => item.uid}
           />
@@ -57,6 +67,12 @@ const styles = StyleSheet.create({
   productName: {
     color: "#fff"
   },
+  addBtn: {
+    color: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 10
+  }
 });
 
 function mapStateToProps({ products }) {
@@ -67,7 +83,8 @@ function mapStateToProps({ products }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setProducts: (products) => dispatch(setProducts(products))
+    setProducts: (products) => dispatch(setProducts(products)),
+    addProduct: (product) => dispatch(addProduct(product))
   }
 };
 

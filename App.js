@@ -8,6 +8,7 @@ import thunk from 'redux-thunk';
 
 import restaurants from './src/reducers/restaurants';
 import products from './src/reducers/products';
+import order from './src/reducers/order';
 
 import Home from './src/containers/Home';
 import Restaurants from './src/containers/Restaurants';
@@ -15,7 +16,7 @@ import RestaurantDetail from './src/containers/RestaurantDetail';
 import Order from './src/containers/Order';
 //import AppStatusBar from './src/components/AppStatusBar';
 
-const store = createStore(combineReducers({ restaurants, products }), applyMiddleware(thunk));
+const store = createStore(combineReducers({ restaurants, products, order }), applyMiddleware(thunk));
 
 const RestaurantTabs = createBottomTabNavigator(
   {
