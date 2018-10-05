@@ -11,7 +11,8 @@ class RestaurantsList extends React.Component {
     super(props);
 
     this.state = {
-      loading: true
+      loading: true,
+      productsAmount: []
     }
   }
 
@@ -22,10 +23,37 @@ class RestaurantsList extends React.Component {
       let products = await ProductsDataProvider.getRestaurantProducts({ restaurantName });
       this.props.setProducts(products);
 
-      this.setState({ loading: false });
+      this.setState({ loading: false, productsAmount: new Array(products.length).fill(0) });
     } catch (error) {
 
     }
+  }
+
+  onDecrementProductAmount(index) {
+    this.setState(prevState => {
+      let productsAmount = prevState.productsAmount;
+
+      if(productsAmount[index] > 0) {
+        productsAmount[index]--;
+      }
+
+      return {
+        ...prevState,
+        productsAmount
+      }
+    });
+  }
+
+  onIncrementProductAmount(index) {
+    this.setState(prevState => {
+      let productsAmount = prevState.productsAmount;
+      productsAmount[index]++;
+
+      return {
+        ...prevState,
+        productsAmount
+      }
+    });
   }
 
   onSelectProduct(product) {
@@ -38,14 +66,28 @@ class RestaurantsList extends React.Component {
         {!this.state.loading &&
           <FlatList
             data={this.props.products}
-            renderItem={({ item }) =>
+            extraData={{
+              productsAmount: this.state.productsAmount
+            }}
+            renderItem={({ item, index }) =>
               <View>
-                <TouchableHighlight style={styles.productBtn} onPress={() => this.onSelectProduct(item)}>
+                <TouchableHighlight style={styles.productBtn}>
                   <Text style={styles.productName}>{item.name}</Text>
                 </TouchableHighlight>
-                <TouchableHighlight style={styles.addBtn}>
-                  <Text>+</Text>
-                </TouchableHighlight>
+                <View style={styles.orderElementsBox}>
+                  <TouchableHighlight style={styles.orderElements} onPress={() => this.onDecrementProductAmount(index)}>
+                    <Text>-</Text>
+                  </TouchableHighlight>
+                  <TouchableHighlight style={styles.orderElements}>
+                    <Text>{this.state.productsAmount[index]}</Text>
+                  </TouchableHighlight>
+                  <TouchableHighlight style={styles.orderElements} onPress={() => this.onIncrementProductAmount(index)}>
+                    <Text>+</Text>
+                  </TouchableHighlight>
+                  <TouchableHighlight style={styles.orderElements}>
+                    <Text>Add to cart</Text>
+                  </TouchableHighlight>
+                </View>
               </View>
             }
             keyExtractor={(item, index) => item.uid}
@@ -67,11 +109,17 @@ const styles = StyleSheet.create({
   productName: {
     color: "#fff"
   },
-  addBtn: {
-    color: "#fff",
+  orderElementsBox: {
     justifyContent: "center",
     alignItems: "center",
-    height: 10
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  },
+  orderElements: {
+    flex: 0.3,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 30
   }
 });
 
