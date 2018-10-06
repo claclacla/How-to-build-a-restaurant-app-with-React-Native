@@ -6,7 +6,7 @@ import ProductsDataProvider from '../../../../dataProviders/api/ProductsDataProv
 import { setProducts } from '../../../../actions/products';
 import { addProduct } from '../../../../actions/order';
 
-class RestaurantsList extends React.Component {
+class Products extends React.Component {
   constructor(props) {
     super(props);
 
@@ -17,6 +17,8 @@ class RestaurantsList extends React.Component {
   }
 
   async componentDidMount() {
+    console.log("products mount");
+    
     try {
       let restaurantName = this.props.restaurantName;
 
@@ -56,7 +58,7 @@ class RestaurantsList extends React.Component {
     });
   }
 
-  onSelectProduct(product) {
+  onAddToCart(product) {    
     this.props.addProduct(product);
   }
 
@@ -84,7 +86,7 @@ class RestaurantsList extends React.Component {
                   <TouchableHighlight style={styles.orderElements} onPress={() => this.onIncrementProductAmount(index)}>
                     <Text>+</Text>
                   </TouchableHighlight>
-                  <TouchableHighlight style={styles.orderElements}>
+                  <TouchableHighlight style={styles.orderElements} onPress={() => this.onAddToCart(item)}>
                     <Text>Add to cart</Text>
                   </TouchableHighlight>
                 </View>
@@ -139,4 +141,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(RestaurantsList);
+)(Products);

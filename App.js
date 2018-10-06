@@ -1,7 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
@@ -10,6 +9,7 @@ import restaurants from './src/reducers/restaurants';
 import products from './src/reducers/products';
 import order from './src/reducers/order';
 
+import OrderButton from './src/common/OrderButton';
 import Home from './src/containers/Home';
 import Restaurants from './src/containers/Restaurants';
 import RestaurantDetail from './src/containers/RestaurantDetail';
@@ -18,22 +18,29 @@ import Order from './src/containers/Order';
 
 const store = createStore(combineReducers({ restaurants, products, order }), applyMiddleware(thunk));
 
-const RestaurantTabs = createBottomTabNavigator(
-  {
-    "Restaurant": RestaurantDetail,
-    "Order": Order 
-  },
-);
-
 const AppStackNavigator = createStackNavigator({
   Home: {
-    screen: Home
+    screen: Home,
+    navigationOptions: ({ navigation }) => ({
+      headerRight: (<OrderButton navigate={navigation.navigate} />)
+    }),
   },
   Restaurants: {
-    screen: Restaurants
+    screen: Restaurants,
+    navigationOptions: ({ navigation }) => ({
+      title: "Restaurants",
+      headerRight: (<OrderButton navigate={navigation.navigate} />)
+    })
   },
-  RestaurantTabs: {
-    screen: RestaurantTabs 
+  RestaurantDetail: {
+    screen: RestaurantDetail,
+    navigationOptions: ({ navigation }) => ({
+      title: navigation.state.params.restaurantName,
+      headerRight: (<OrderButton navigate={navigation.navigate} />)
+    })
+  },
+  Order: {
+    screen: Order
   }
 });
 

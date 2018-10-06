@@ -29,7 +29,7 @@ class RestaurantsList extends React.Component {
 
   onSelectRestaurant(restaurantName) {
     const { navigate } = this.props.navigation;
-    navigate('RestaurantTabs', {
+    navigate('RestaurantDetail', {
       restaurantName: restaurantName
     });
   }
