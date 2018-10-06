@@ -88,3 +88,4 @@ This project is licensed under the MIT License
 - [Expo](https://expo.io)
 - [React navigation](https://reactnavigation.org)
 - [Environment variables module](https://github.com/zetachang/react-native-dotenv)
+- [Jest](https://jestjs.io)

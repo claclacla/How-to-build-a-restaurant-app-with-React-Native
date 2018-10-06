@@ -66,3 +66,5 @@ typings/
 package-lock.json
 etc
 .expo
+__snapshots__
+*.snap
