@@ -32,6 +32,32 @@ create-react-native-app <project-folder>
 ### Development
 
 ```bash
+
+# Change the directory to the docker development 
+cd docker/dev
+
+# Create a .env file with your local application folder
+echo "APP_FOLDER=/path-to-your-local/app" > .env 
+
+# Run the micro services using docker compose
+sudo docker-compose up -d
+
+# Log into the container 
+sudo docker exec -it RestaurantMobileApp bash
+
+# Go to the project folder
+cd /usr/src/app
+
+# Run the tests
+npm run test
+
+```
+
+--------------------------------------------------------------------------------
+
+### Development
+
+```bash
 # Change the directory to the docker development 
 cd docker/dev
 
