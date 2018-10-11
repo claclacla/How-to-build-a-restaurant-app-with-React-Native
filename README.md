@@ -2,6 +2,9 @@
 
 ## Create a complete mobile application with React Native
 
+It really doesn't matter what is your favorite junk food!
+This app will help you to explore the best restaurants menu.
+
 --------------------------------------------------------------------------------
 
 ### Prerequisites
