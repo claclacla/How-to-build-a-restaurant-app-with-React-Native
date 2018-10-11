@@ -7,7 +7,7 @@ test('addProduct', () => {
     name: "Product name" 
   });
 
-  let action = addProduct(product)
+  let action = addProduct(product);
 
   expect(action).toBeInstanceOf(Object);
   expect(action).toHaveProperty("type");
