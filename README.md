@@ -29,7 +29,7 @@ create-react-native-app <project-folder>
 
 --------------------------------------------------------------------------------
 
-### Development
+### Testing
 
 ```bash
 
