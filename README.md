@@ -16,19 +16,6 @@ docker-compose 1.19.0+
 
 --------------------------------------------------------------------------------
 
-### Create a new project
-
-```bash
-# Install the application for creating a new Native project
-npm install -g create-react-native-app
-
-# Create a new project with the following command
-create-react-native-app <project-folder>
-
-```
-
---------------------------------------------------------------------------------
-
 ### Testing
 
 ```bash
