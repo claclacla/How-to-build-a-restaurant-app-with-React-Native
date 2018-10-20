@@ -2,8 +2,21 @@
 
 ## Create a complete mobile application with React Native
 
-It really doesn't matter what is your favorite junk food!
-This app will help you to explore the best restaurants menu.
+flavour
+enhance: accrescere
+implementation
+
+It really doesn't matter what is your favorite (junk) food, this app will help you to explore the best(!) restaurants menu and their cheap and delicious dishes. Choose restaurants and foods by categories and fill your cart!
+
+### Application data resources
+
+In this project i renounced to `Redux thunks`, decoupling the application stores from the data retreival and manipulation. The Redux actions are simple synchronous operations and the API calls are delegated to the application components. 
+
+Each API resource has a `repository` as a first abstraction layer using my [pure-src](https://github.com/claclacla/PureSrc-A-functional-programming-approach-to-the-repository-pattern) package. The repositories operations are used by the high-level `data repositories` in order to provide to the application a concrete set of functions divided by section.
+
+### Tests
+
+The application contains a set of Jest tests with example for `actions`, `components`, `dataProviders` and `reducers` in the `__tests__` folder. Follow the instructions on the `Testing` section below in order to run them.
 
 --------------------------------------------------------------------------------
 
