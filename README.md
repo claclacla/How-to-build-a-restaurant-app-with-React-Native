@@ -2,9 +2,7 @@
 
 ## Create a complete mobile application with React Native
 
-flavour
-enhance: accrescere
-implementation
+### (Under construction!)
 
 It really doesn't matter what is your favorite (junk) food, this app will help you to explore the best(!) restaurants menu and their cheap and delicious dishes. Choose restaurants and foods by categories and fill your cart!
 
@@ -14,9 +12,14 @@ In this project i renounced to `Redux thunks`, decoupling the application stores
 
 Each API resource has a `repository` as a first abstraction layer using my [pure-src](https://github.com/claclacla/PureSrc-A-functional-programming-approach-to-the-repository-pattern) package. The repositories operations are used by the high-level `data repositories` in order to provide to the application a concrete set of functions divided by section.
 
-### Tests
+### Testing
 
 The application contains a set of Jest tests with example for `actions`, `components`, `dataProviders` and `reducers` in the `__tests__` folder. Follow the instructions on the `Testing` section below in order to run them.
+
+### Development
+
+The dockerized development environment was created with two services: a fake API server written in Node.js/Express.js and a Node.js image with the expo-cli globally installed. 
+For watching the logs, open a terminal and follow the container output using the command on `Development` section.
 
 --------------------------------------------------------------------------------
 
