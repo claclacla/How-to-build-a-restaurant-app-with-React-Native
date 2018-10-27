@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import ProductsDataProvider from '../../../../dataProviders/api/ProductsDataProvider';
 import { setProducts } from '../../../../actions/products';
 import { addProduct } from '../../../../actions/order';
+import OrderProduct from '../../../../entities/OrderProduct';
 
 class Products extends React.Component {
   constructor(props) {
@@ -16,9 +17,7 @@ class Products extends React.Component {
     }
   }
 
-  async componentDidMount() {
-    console.log("products mount");
-    
+  async componentDidMount() {   
     try {
       let restaurantName = this.props.restaurantName;
 
@@ -58,8 +57,16 @@ class Products extends React.Component {
     });
   }
 
-  onAddToCart(product) {    
-    this.props.addProduct(product);
+  onAddToCart(index) {
+    let product = this.props.products[index];
+
+    let orderProduct = new OrderProduct({
+      uid: product.uid,
+      name: product.name,
+      amount: this.state.productsAmount[index]
+    });
+
+    this.props.addProduct(orderProduct);
   }
 
   render() {
@@ -86,7 +93,7 @@ class Products extends React.Component {
                   <TouchableHighlight style={styles.orderElements} onPress={() => this.onIncrementProductAmount(index)}>
                     <Text>+</Text>
                   </TouchableHighlight>
-                  <TouchableHighlight style={styles.orderElements} onPress={() => this.onAddToCart(item)}>
+                  <TouchableHighlight style={styles.orderElements} onPress={() => this.onAddToCart(index)}>
                     <Text>Add to cart</Text>
                   </TouchableHighlight>
                 </View>
