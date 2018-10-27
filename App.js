@@ -40,7 +40,10 @@ const AppStackNavigator = createStackNavigator({
     })
   },
   Order: {
-    screen: Order
+    screen: Order,
+    navigationOptions: ({ navigation }) => ({
+      title: "Order"
+    })
   }
 });
 
