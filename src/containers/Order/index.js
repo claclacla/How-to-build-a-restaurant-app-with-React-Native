@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, FlatList, Text, Button, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
+import { updateProductAmount } from '../../actions/order';
 
 class Order extends React.Component {
   constructor(props) {
@@ -8,11 +9,18 @@ class Order extends React.Component {
   }
 
   onDecrementProductAmount(index) {
+    let product = this.props.order.products[index];
 
+    if(product.amount === 1) {
+      return;
+    }
+
+    this.props.updateProductAmount(product.uid, product.amount - 1);
   }
 
   onIncrementProductAmount(index) {
-
+    let product = this.props.order.products[index];
+    this.props.updateProductAmount(product.uid, product.amount + 1);
   }
 
   removeProduct(index) {
@@ -22,8 +30,11 @@ class Order extends React.Component {
   render() {
     return (
       <View>
-        {<FlatList
+        <FlatList
           data={this.props.order.products}
+          extraData={{
+            order: this.props.order
+          }}
           renderItem={({ item, index }) =>
             <View style={styles.product}>
               <View style={styles.amountButtonsBox}>
@@ -50,7 +61,7 @@ class Order extends React.Component {
             </View>
           }
           keyExtractor={(item, index) => item.uid}
-        />}
+        />
       </View>
     )
   }
@@ -101,7 +112,13 @@ function mapStateToProps({ order }) {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    updateProductAmount: (productUid, amount) => { dispatch(updateProductAmount(productUid, amount)) }
+  }
+}
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Order);
