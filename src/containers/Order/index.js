@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, FlatList, Text, Button, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
-import { updateProductAmount } from '../../actions/order';
+import { updateProductAmount, removeProduct } from '../../actions/order';
 
 class Order extends React.Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class Order extends React.Component {
   onDecrementProductAmount(index) {
     let product = this.props.order.products[index];
 
-    if(product.amount === 1) {
+    if (product.amount === 1) {
       return;
     }
 
@@ -23,8 +23,9 @@ class Order extends React.Component {
     this.props.updateProductAmount(product.uid, product.amount + 1);
   }
 
-  removeProduct(index) {
-
+  removeOrderProduct(index) {
+    let product = this.props.order.products[index];
+    this.props.removeProduct(product.uid);
   }
 
   render() {
@@ -54,7 +55,7 @@ class Order extends React.Component {
               <View style={styles.removeButtonBox}>
                 <Button
                   style={styles.removeButton}
-                  onPress={() => this.removeProduct(index)}
+                  onPress={() => this.removeOrderProduct(index)}
                   title="Remove"
                 />
               </View>
@@ -114,7 +115,8 @@ function mapStateToProps({ order }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    updateProductAmount: (productUid, amount) => { dispatch(updateProductAmount(productUid, amount)) }
+    updateProductAmount: (productUid, amount) => { dispatch(updateProductAmount(productUid, amount)) },
+    removeProduct: (productUid) => { dispatch(removeProduct(productUid)) }
   }
 }
 

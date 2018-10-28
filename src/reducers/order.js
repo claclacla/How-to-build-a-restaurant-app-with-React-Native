@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, UPDATE_PRODUCT_AMOUNT } from '../actions/order';
+import { ADD_PRODUCT, UPDATE_PRODUCT_AMOUNT, REMOVE_PRODUCT } from '../actions/order';
 
 import Order from '../entities/Order';
 
@@ -20,6 +20,17 @@ function order(state = new Order(), action) {
           return product;
         })
       };
+    case REMOVE_PRODUCT:
+      return {
+        ...state,
+        products: state.products.filter(product => {
+          if(product.uid !== action.productUid) {
+            return true;
+          }
+
+          return false;
+        })
+      }  
     default:
       return state;
   }
