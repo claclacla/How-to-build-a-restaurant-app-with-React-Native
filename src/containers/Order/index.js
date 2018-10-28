@@ -1,10 +1,18 @@
 import React from 'react';
-import { StyleSheet, View, FlatList, Text, Button } from 'react-native';
+import { StyleSheet, View, FlatList, Text, Button, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 
 class Order extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  onDecrementProductAmount(index) {
+
+  }
+
+  onIncrementProductAmount(index) {
+
   }
 
   removeProduct(index) {
@@ -18,10 +26,21 @@ class Order extends React.Component {
           data={this.props.order.products}
           renderItem={({ item, index }) =>
             <View style={styles.product}>
+              <View style={styles.amountButtonsBox}>
+                <TouchableHighlight style={styles.amountButtonsElements} onPress={() => this.onDecrementProductAmount(index)}>
+                  <Text>-</Text>
+                </TouchableHighlight>
+                <TouchableHighlight style={styles.amountButtonsElements}>
+                  <Text>{item.amount}</Text>
+                </TouchableHighlight>
+                <TouchableHighlight style={styles.amountButtonsElements} onPress={() => this.onIncrementProductAmount(index)}>
+                  <Text>+</Text>
+                </TouchableHighlight>
+              </View>
               <View style={styles.productNameBox}>
                 <Text style={styles.productName}>{item.name}</Text>
               </View>
-              <View style={styles.orderElementsBox}>
+              <View style={styles.removeButtonBox}>
                 <Button
                   style={styles.removeButton}
                   onPress={() => this.removeProduct(index)}
@@ -46,15 +65,29 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap'
   },
+  amountButtonsBox: {
+    flex: 0.2,
+    height: 80,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  },
+  amountButtonsElements: {
+    flex: 0.3,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 80
+  },
   productNameBox: {
-    flex: 0.7,
+    flex: 0.5,
     height: 80,
     justifyContent: "center",
   },
   productName: {
     color: "#fff"
   },
-  orderElementsBox: {
+  removeButtonBox: {
     flex: 0.3,
     height: 80,
     justifyContent: "center",
