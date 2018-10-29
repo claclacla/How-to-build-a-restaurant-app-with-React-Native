@@ -14,6 +14,7 @@ import Home from './src/containers/Home';
 import Restaurants from './src/containers/Restaurants';
 import RestaurantDetail from './src/containers/RestaurantDetail';
 import Order from './src/containers/Order';
+import Checkout from './src/containers/Checkout';
 //import AppStatusBar from './src/components/AppStatusBar';
 
 const store = createStore(combineReducers({ restaurants, products, order }), applyMiddleware(thunk));
@@ -43,6 +44,12 @@ const AppStackNavigator = createStackNavigator({
     screen: Order,
     navigationOptions: ({ navigation }) => ({
       title: "Order"
+    })
+  },
+  Checkout: {
+    screen: Checkout,
+    navigationOptions: ({ navigation }) => ({
+      title: "Checkout"
     })
   }
 });

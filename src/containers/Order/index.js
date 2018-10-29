@@ -29,7 +29,8 @@ class Order extends React.Component {
   }
 
   checkout() {
-
+    const { navigate } = this.props.navigation;
+    navigate('Checkout');
   }
 
   render() {
