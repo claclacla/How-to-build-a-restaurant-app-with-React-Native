@@ -28,10 +28,15 @@ class Order extends React.Component {
     this.props.removeProduct(product.uid);
   }
 
+  checkout() {
+
+  }
+
   render() {
     return (
-      <View>
+      <View style={styles.mainBox}>
         <FlatList
+          style={styles.productsList}
           data={this.props.order.products}
           extraData={{
             order: this.props.order
@@ -63,12 +68,33 @@ class Order extends React.Component {
           }
           keyExtractor={(item, index) => item.uid}
         />
+        <TouchableHighlight
+          onPress={() => this.checkout()}
+          style={styles.checkoutButton}
+        >
+          <Text style={styles.checkoutButtonText}>Checkout</Text>
+        </TouchableHighlight>
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  mainBox: {
+    flex: 1
+  },
+  productsList: {
+    flex: 0.9
+  },
+  checkoutButton: {
+    flex: 0.1,
+    backgroundColor: "#666",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  checkoutButtonText: {
+    color: "#fff"
+  },
   product: {
     height: 80,
     backgroundColor: "#777",
