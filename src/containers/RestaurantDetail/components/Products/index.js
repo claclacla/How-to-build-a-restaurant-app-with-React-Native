@@ -58,12 +58,18 @@ class Products extends React.Component {
   }
 
   onAddToCart(index) {
+    let amount = this.state.productsAmount[index];
+
+    if(amount === 0) {
+      return;
+    }
+
     let product = this.props.products[index];
 
     let orderProduct = new OrderProduct({
       uid: product.uid,
       name: product.name,
-      amount: this.state.productsAmount[index]
+      amount
     });
 
     this.props.addProduct(orderProduct);
