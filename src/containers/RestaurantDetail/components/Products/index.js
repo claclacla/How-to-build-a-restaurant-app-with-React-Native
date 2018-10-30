@@ -17,7 +17,7 @@ class Products extends React.Component {
     }
   }
 
-  async componentDidMount() {   
+  async componentDidMount() {
     try {
       let restaurantName = this.props.restaurantName;
 
@@ -30,11 +30,35 @@ class Products extends React.Component {
     }
   }
 
+  getProductAmountStyle(uid) {
+    let style = [styles.productAmount];
+
+    this.props.order.products.map(product => {
+      if(product.uid === uid) {
+        style.push({opacity: 1});
+      }
+    });
+
+    return style;
+  }
+
+  getProductAmount(uid) {
+    let productAmount = "";
+
+    this.props.order.products.map(product => {
+      if(product.uid === uid) {
+        productAmount = "x" + product.amount;
+      }
+    });
+
+    return productAmount;
+  }
+
   onDecrementProductAmount(index) {
     this.setState(prevState => {
       let productsAmount = prevState.productsAmount;
 
-      if(productsAmount[index] > 0) {
+      if (productsAmount[index] > 0) {
         productsAmount[index]--;
       }
 
@@ -60,7 +84,7 @@ class Products extends React.Component {
   onAddToCart(index) {
     let amount = this.state.productsAmount[index];
 
-    if(amount === 0) {
+    if (amount === 0) {
       return;
     }
 
@@ -82,7 +106,7 @@ class Products extends React.Component {
         ...prevState,
         productsAmount
       };
-    });    
+    });
   }
 
   render() {
@@ -97,7 +121,10 @@ class Products extends React.Component {
             renderItem={({ item, index }) =>
               <View>
                 <TouchableHighlight style={styles.productBtn}>
-                  <Text style={styles.productName}>{item.name}</Text>
+                  <View style={styles.productBtnElementsBox}>
+                    <Text style={this.getProductAmountStyle(item.uid)}>{this.getProductAmount(item.uid)}</Text>
+                    <Text style={styles.productName}>{item.name}</Text>
+                  </View>
                 </TouchableHighlight>
                 <View style={styles.orderElementsBox}>
                   <TouchableHighlight style={styles.orderElements} onPress={() => this.onDecrementProductAmount(index)}>
@@ -126,12 +153,24 @@ class Products extends React.Component {
 const styles = StyleSheet.create({
   productBtn: {
     marginTop: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "#777",
     height: 80
   },
+  productBtnElementsBox: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: 80,
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  },
+  productAmount: {
+    flex: 0.2,
+    marginLeft: 15,
+    color: "#fff",
+    opacity: 0
+  },
   productName: {
+    flex: 0.8,
     color: "#fff"
   },
   orderElementsBox: {
@@ -141,15 +180,16 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap'
   },
   orderElements: {
-    flex: 0.3,
+    flex: 0.25,
     justifyContent: "center",
     alignItems: "center",
     height: 30
   }
 });
 
-function mapStateToProps({ products }) {
+function mapStateToProps({ order, products }) {
   return {
+    order,
     products
   }
 }
