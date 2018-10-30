@@ -73,6 +73,16 @@ class Products extends React.Component {
     });
 
     this.props.addProduct(orderProduct);
+
+    this.setState(prevState => {
+      let productsAmount = prevState.productsAmount;
+      productsAmount[index] = 0;
+
+      return {
+        ...prevState,
+        productsAmount
+      };
+    });    
   }
 
   render() {
