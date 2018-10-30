@@ -70,6 +70,7 @@ class Order extends React.Component {
           keyExtractor={(item, index) => item.uid}
         />
         <TouchableHighlight
+          disabled={this.props.order.products.length > 0 ? false : true}
           onPress={() => this.checkout()}
           style={styles.checkoutButton}
         >
